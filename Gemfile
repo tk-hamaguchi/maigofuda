@@ -18,6 +18,7 @@ gemspec
 
 group :test do
   gem 'rspec', '~> 3.9.0'
+  gem 'simplecov', require: false
 end
 
 group :development do
