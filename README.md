@@ -1,5 +1,7 @@
-# Maigofuda
-Short description and motivation.
+# 迷子札 [Maigofuda]
+
+Rails' error handling more easy!
+
 
 ## Usage
 How to use my plugin.
