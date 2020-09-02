@@ -6,6 +6,11 @@ if ENV['COVERAGE']
     add_filter 'spec'
   end
   SimpleCov.command_name 'RSpec'
+
+  if ENV['CODECOV_TOKEN']
+    require 'codecov'
+    SimpleCov.formatter = SimpleCov::Formatter::Codecov
+  end
 end
 
 require 'dummy/config/environment'

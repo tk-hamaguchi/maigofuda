@@ -21,6 +21,7 @@ group :test do
   gem 'rspec-its'
   gem 'rspec_junit_formatter'
   gem 'simplecov', require: false
+  gem 'codecov', require: false
 end
 
 group :development do

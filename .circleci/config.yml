@@ -69,6 +69,8 @@ jobs:
     executor:
       name: default
     parallelism: 1
+    environment:
+      COVERAGE: 1
     steps:
       - checkout
       - bundle_install
@@ -80,6 +82,7 @@ jobs:
             bundle exec rspec \
               --format RspecJunitFormatter --out /tmp/test-results/rspec.xml \
               --format progress \
+              --format html --out /tmp/test-results/rspec.html \
               ${TEST_FILES}
       - store_test_results:
           path: /tmp/test-results
@@ -93,9 +96,9 @@ workflows:
   build_and_test:
     jobs:
       - build
-      - lint_check:
-          requires:
-            - build
+      # - lint_check:
+      #     requires:
+      #       - build
       - unit_test:
           requires:
             - build
