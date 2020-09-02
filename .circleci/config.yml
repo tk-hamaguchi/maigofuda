@@ -1,0 +1,102 @@
+version: 2.1
+
+executors:
+  default:
+    docker:
+      - image: circleci/ruby:2.7.1
+        environment:
+          BUNDLE_APP_CONFIG: ~/workspace/.bundle
+    working_directory: ~/workspace
+
+
+commands:
+  bundle_install:
+    steps:
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+
+      - run: gem install bundler --no-document -v $(grep "BUNDLED WITH" -1 Gemfile.lock | tail -n 1)
+      - run:
+          name: Install dependencies
+          command: |
+            bundle install --jobs=4 --retry=3
+
+
+jobs:
+
+  build:
+    executor:
+      name: default
+    parallelism: 1
+    steps:
+      - checkout
+      - run: gem install bundler --no-document -v $(grep "BUNDLED WITH" -1 Gemfile.lock | tail -n 1)
+      - run:
+          name: Install dependencies
+          command: |
+            bundle config set --local clean 'true'
+            bundle config set --local deployment 'true'
+            bundle install --jobs=4 --retry=3
+      - save_cache:
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+            - .bundle
+
+  lint_check:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - bundle_install
+      - run: mkdir /tmp/test-results
+      - run:
+          name: Check with rubocop
+          command: |
+            bundle exec rubocop -c .rubocop.yml \
+              --format RuboCop::Formatter::JUnitFormatter --out /tmp/test-results/rubocop/rubocop.xml \
+              --format progress \
+              --format html --out /tmp/test-results/rubocop.html
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
+  unit_test:
+    executor:
+      name: default
+    parallelism: 1
+    steps:
+      - checkout
+      - bundle_install
+      - run: mkdir /tmp/test-results
+      - run:
+          name: run tests
+          command: |
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split)"
+            bundle exec rspec \
+              --format RspecJunitFormatter --out /tmp/test-results/rspec.xml \
+              --format progress \
+              ${TEST_FILES}
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
+
+
+workflows:
+
+  build_and_test:
+    jobs:
+      - build
+      - lint_check:
+          requires:
+            - build
+      - unit_test:
+          requires:
+            - build
+            # - lint_check

@@ -19,12 +19,14 @@ gemspec
 group :test do
   gem 'rspec', '~> 3.9.0'
   gem 'rspec-its'
+  gem 'rspec_junit_formatter'
   gem 'simplecov', require: false
 end
 
 group :development do
   gem 'rubocop', '~> 0.89.1'
   gem 'rubocop-faker'
+  gem 'rubocop-junit-formatter'
   gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
