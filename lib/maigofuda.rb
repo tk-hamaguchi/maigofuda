@@ -15,6 +15,9 @@ module Maigofuda
 
   eager_autoload do
     autoload :BaseError, 'maigofuda/errors/base_error'
+    autoload :Warning,   'maigofuda/errors/warning'
+    autoload :Error,     'maigofuda/errors/error'
+    autoload :Fatal,     'maigofuda/errors/fatal'
   end
 
   #
