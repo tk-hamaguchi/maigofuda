@@ -4,11 +4,13 @@ $LOAD_PATH.push File.expand_path('lib', __dir__)
 
 # Maintain your gem's version:
 require 'maigofuda/version'
+build_version = File.read('BUILD_VERSION').strip if File.exist?('BUILD_VERSION')
+version = Maigofuda::Version.string(build_version)
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |spec|
   spec.name        = 'maigofuda'
-  spec.version     = Maigofuda::VERSION
+  spec.version     = version
   spec.authors     = ['Takahiro HAMAGUCHI']
   spec.email       = ['tk.hamaguchi@gmail.com']
   spec.homepage    = 'https://github.com/tk-hamaguchi/maigofuda'

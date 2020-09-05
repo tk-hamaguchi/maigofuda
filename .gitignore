@@ -7,3 +7,5 @@ spec/dummy/tmp/
 *.swp
 .DS_Store
 coverage
+*.gem
+BUILD_VERSION
