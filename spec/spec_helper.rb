@@ -4,6 +4,8 @@ if ENV['COVERAGE']
   require 'simplecov'
   SimpleCov.start do
     add_filter 'spec'
+
+    add_group 'Errors', 'lib/maigofuda/errors'
   end
   SimpleCov.command_name 'RSpec'
 

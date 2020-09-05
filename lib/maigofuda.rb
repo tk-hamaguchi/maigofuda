@@ -3,7 +3,7 @@
 require 'maigofuda/railtie'
 
 #
-# 迷子札の既定モジュール
+# 迷子札の基底モジュール
 #
 # @version 0.1.0
 # @since   0.1.0
@@ -14,10 +14,20 @@ module Maigofuda
   autoload :Config
 
   eager_autoload do
-    autoload :BaseError, 'maigofuda/errors/base_error'
-    autoload :Warning,   'maigofuda/errors/warning'
-    autoload :Error,     'maigofuda/errors/error'
-    autoload :Fatal,     'maigofuda/errors/fatal'
+    autoload :BaseError,                'maigofuda/errors/base_error'
+    autoload :Warning,                  'maigofuda/errors/warning'
+    autoload :BadRequestError,          'maigofuda/errors/bad_request_error'
+    autoload :UnauthorizedError,        'maigofuda/errors/unauthorized_error'
+    autoload :ForbiddenError,           'maigofuda/errors/forbidden_error'
+    autoload :NotFoundError,            'maigofuda/errors/not_found_error'
+    autoload :ConflictError,            'maigofuda/errors/conflict_error'
+    autoload :PreconditionFailedError,  'maigofuda/errors/precondition_failed_error'
+    autoload :UnprocessableEntityError, 'maigofuda/errors/unprocessable_entity_error'
+    autoload :LockedError,              'maigofuda/errors/locked_error'
+    autoload :Error,                    'maigofuda/errors/error'
+    autoload :InternalServerError,      'maigofuda/errors/internal_server_error'
+    autoload :ServiceUnavailableError,  'maigofuda/errors/service_unavailable_error'
+    autoload :Fatal,                    'maigofuda/errors/fatal'
   end
 
   #
