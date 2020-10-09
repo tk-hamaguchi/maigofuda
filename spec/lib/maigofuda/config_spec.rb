@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'spec_helper'
+
 RSpec.describe Maigofuda::Config do
   subject(:described_instance) { described_class.instance }
 

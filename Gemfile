@@ -17,15 +17,15 @@ gemspec
 # gem 'byebug', group: [:development, :test]
 
 group :test do
+  gem 'codecov', require: false
   gem 'rspec', '~> 3.9.0'
   gem 'rspec-its'
   gem 'rspec_junit_formatter'
   gem 'simplecov', require: false
-  gem 'codecov', require: false
 end
 
 group :development do
-  gem 'rubocop', '~> 0.89.1'
+  gem 'rubocop', '~> 0.93.0'
   gem 'rubocop-faker'
   gem 'rubocop-junit-formatter'
   gem 'rubocop-performance'

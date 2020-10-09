@@ -12,6 +12,7 @@ module Maigofuda
   extend ActiveSupport::Autoload
 
   autoload :Config
+  autoload :ErrorHandler
 
   eager_autoload do
     autoload :BaseError,                'maigofuda/errors/base_error'

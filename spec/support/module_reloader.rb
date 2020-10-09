@@ -10,7 +10,7 @@ module ModuleReloader
     load const_path
   end
 
-  def around_reload(const_symbol, const_path, &_block)
+  def around_reload(const_symbol, _const_path, &_block)
     tmp_const = Maigofuda.const_get const_symbol
     default_injection = Maigofuda.configuration.injection_error_class
     yield
