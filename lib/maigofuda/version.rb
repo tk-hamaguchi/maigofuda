@@ -20,7 +20,7 @@ module Maigofuda
     TINY  = 0
 
     # @return [String,nil] リリース状況
-    PRE   = nil
+    PRE   = 'pre'
 
     #
     # バージョン文字列

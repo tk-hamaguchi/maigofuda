@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    maigofuda (0.1.0)
+    maigofuda (0.1.0.pre)
       rails (~> 6.0.3, >= 6.0.3.2)
 
 GEM
